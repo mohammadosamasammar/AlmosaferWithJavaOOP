@@ -15,11 +15,14 @@ public class Parameters
 	
 	String URLen = "https://www.almosafer.com/en";
 	//lang
-	String expecedLang = ("en");
+	String expecedLang = ("en");     
 	//currency
 	String expectedCurrency = "SAR";
 	//phone number
 	String expectedPhoneNum = "+966554400000";
+	//hotel tap
+	String ExpectedHotelTap = ("false");    
+	
 	
 	
 }

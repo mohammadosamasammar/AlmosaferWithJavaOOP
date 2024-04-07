@@ -6,7 +6,7 @@
       <class name="HomePage.HomePageTestCases">
         <methods>
           <include name="beforetest"/>
-          <include name="CheckTheDefaultLangaugeEN"/>
+          <include name="checkDepatureAndReturnDate"/>
         </methods>
       </class> <!-- HomePage.HomePageTestCases -->
     </classes>

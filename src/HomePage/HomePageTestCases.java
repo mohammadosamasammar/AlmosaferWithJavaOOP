@@ -3,6 +3,8 @@ package HomePage;
 import static org.testng.Assert.assertEquals;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.util.Date;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,7 +13,7 @@ import org.testng.annotations.Test;
 
 public class HomePageTestCases extends Parameters
 {
-	@BeforeTest
+	@BeforeTest     
 	public void beforetest() throws InterruptedException
 	{
 		driver.manage().window().maximize();
@@ -57,4 +59,47 @@ public class HomePageTestCases extends Parameters
 		
 	}
 	
-}
+	@Test (priority = 4 , description = " the 4st test for check the qitaf logo is displayed")
+	public void CheckQitafLogoIsDisplayed () throws InterruptedException 
+	{
+		Thread.sleep(2000);
+		WebElement QitafLogo = driver.findElement(By.className("bxRSiR"));
+		boolean ActualLogo = QitafLogo.isDisplayed();
+		assertEquals(ActualLogo, true );   
+		
+		
+	}
+	
+	@Test(priority = 5 , description = " the 5st test for check the hotel tap is not selected")
+	public void CheckHotelTapIsNotSelected() throws InterruptedException 
+	{
+		Thread.sleep(2000);
+		WebElement HotelTap = driver.findElement(By.id("uncontrolled-tab-example-tab-hotels"));
+		String ActualHotelTap = HotelTap.getAttribute("aria-selected");
+		assertEquals(ActualHotelTap, ExpectedHotelTap);
+		
+		
+	}
+	
+	@Test(priority = 6 , description = " the 6st test for check the Flight Departure and Flight Return")
+	public void checkDepatureAndReturnDate () 
+	{
+		
+		LocalDate today =  LocalDate.now();     
+		
+		int ExpectedDepartureDate = today.plusDays(1).getDayOfMonth();
+		int ExpectedReturnDate = today.plusDays(2).getDayOfMonth();
+		
+		String ActualDepatureDateOnTheWebSite = driver.findElement(By.cssSelector("span[class='sc-cPuPxo LiroG']")).getText();
+		int ActuaIDepatureDateOnTheWebsiteAsNumber = Integer.parseInt(ActualDepatureDateOnTheWebSite);
+		
+		String ActualReturnDateOnTheWebSite = driver.findElement(By.xpath("//*[@id=\"uncontrolled-tab-example-tabpane-flights\"]/div/div[2]/div[1]/div/div[3]/div/div/div/div[2]/span[2]")).getText();
+		int ActualReturnDateOnTheWebSiteAsNumber = Integer.parseInt(ActualReturnDateOnTheWebSite);
+		
+		//departure date
+		assertEquals(ExpectedDepartureDate, ActuaIDepatureDateOnTheWebsiteAsNumber);
+		//return date
+		assertEquals(ExpectedReturnDate, ActualReturnDateOnTheWebSiteAsNumber);
+	}
+	                   
+}    
