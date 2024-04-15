@@ -26,7 +26,7 @@ public class HomePageTestCases extends Parameters
 		{
 			
 			WebElement SARButton = driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/button[1]"));
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			SARButton.click();
 			
 		}	
@@ -38,7 +38,7 @@ public class HomePageTestCases extends Parameters
 	{
 		Thread.sleep(2000);
 		String actualLang = driver.findElement(By.tagName("html")).getAttribute("lang");
-		assertEquals(actualLang, expecedLang);
+		assertEquals(actualLang, expecedEnglishLang);
 	}
 	
 	@Test (priority = 2 , description = " the 2st test for check the default currency is SAR ")
@@ -82,8 +82,9 @@ public class HomePageTestCases extends Parameters
 	}
 	
 	@Test(priority = 6 , description = " the 6st test for check the Flight Departure and Flight Return")
-	public void checkDepatureAndReturnDate () 
+	public void checkDepatureAndReturnDate () throws InterruptedException 
 	{
+		Thread.sleep(2000);
 		
 		LocalDate today =  LocalDate.now();     
 		
@@ -99,7 +100,30 @@ public class HomePageTestCases extends Parameters
 		//departure date
 		assertEquals(ExpectedDepartureDate, ActuaIDepatureDateOnTheWebsiteAsNumber);
 		//return date
-		assertEquals(ExpectedReturnDate, ActualReturnDateOnTheWebSiteAsNumber);
+		assertEquals(ExpectedReturnDate, ActualReturnDateOnTheWebSiteAsNumber); 
+		
+	}
+	
+	@Test(priority = 7 , description = " the 7st test for change langauge randomly" )
+	public void ChangeLangaugeRandomly () throws InterruptedException 
+	{     
+		Thread.sleep(1000);
+		driver.get(Websites[randomwebsite]);
+		Thread.sleep(1000);
+		
+		if (driver.getCurrentUrl().contains("en"))
+		{
+			String actualLang = driver.findElement(By.tagName("html")).getAttribute("lang");
+			assertEquals(actualLang, expecedEnglishLang);
+			
+		}
+		else 
+		{
+			String actualLang = driver.findElement(By.tagName("html")).getAttribute("lang");
+			assertEquals(actualLang, expectedArabicLang);
+			
+		}
+		
 	}
 	                   
 }    
